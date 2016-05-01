@@ -35,7 +35,7 @@ namespace Neural_Project
             Benchmark.Start();
             S_V_M = new Support_Vector_Machine(RI);
             Benchmark.End();
-            this.trainingtime.Text = " The Training Time : " + Benchmark.GetSeconds().ToString(); ;
+            this.trainingtime.Text = " The Training Time : " + Benchmark.GetSeconds().ToString();
             for (int d = 0; d < this.RI.TestingImages.Length; ++d)
             {
                 LM = new loadimage(RI.TestingImages[d]);
@@ -80,19 +80,18 @@ namespace Neural_Project
             string output_to_Messagebox = "the output is ";
             string[] f = this.RI.classes.ToArray();
             double maxf = res.Max();
-            int indexk = 0;
-            for (int d = 0; d < res.Length; d++)
-            {
-                if (res[d] >= maxf)
-                    indexk = d;
-            }
-            output_to_Messagebox = f[indexk];
-
+            //int indexk = 0;
             //for (int d = 0; d < res.Length; d++)
             //{
-            //    if (res[d] > 3)
-            //        output_to_Messagebox += " " + f[d];
+            //    if (res[d] >= maxf)
+            //        indexk = d;
             //}
+            //output_to_Messagebox = f[indexk];
+            for (int d = 0; d < res.Length; d++)
+            {
+                if (res[d] > 3)
+                    output_to_Messagebox += " " + f[d];
+            }
             Benchmark.End();
             this.testingtime.Text = "The Testing Time : " + Benchmark.GetSeconds().ToString();
             this.overall_accuracy_control.Text = this.overall_accuracy.ToString();
@@ -107,7 +106,6 @@ namespace Neural_Project
                 if (output[s] > 3)
                 {
                     confusionmatrix[0, s]++;
-
                 }
 
             }

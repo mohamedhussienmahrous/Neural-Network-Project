@@ -60,7 +60,7 @@ namespace Neural_Project
             this.trainingtime.Text = "The Training time : " + Benchmark.GetSeconds().ToString();
             double[] output = new double[ReadIm.classes.Count];
             loadimage LMR;
-            for (int c = 0; c < this.ReadIm.TestingImages.Count(); c++)
+            for (int c = 0; c < this.ReadIm.TestingImages.Length; c++)
             {
                 LMR = new loadimage(this.ReadIm.TestingImages[c]);
                 output = ML.MLPTesting(LMR);
@@ -68,6 +68,7 @@ namespace Neural_Project
             }
 
             display_results(confusion_matrix_control, overall_accuracy_control);
+            overall_accuracy_control.Text = (((this.number_of_rigth_samples) / (double)(this.numberallsamplesinaccurcy)) * 100).ToString();
             MessageBox.Show("Done Testing");
         }
 

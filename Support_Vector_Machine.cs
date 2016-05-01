@@ -32,6 +32,7 @@ namespace Neural_Project
             trainClasses = new Matrix<float>(RM.TrainingSamples.Count, 1);
             sample = new Matrix<float>(1, RM.TrainingSamples[0].Feature.Descriptor.Length);
             string[] all_classes = RM.classes.ToArray();
+ /// make function to load training data set
             for (int u = 0; u < RM.TrainingSamples.Count; u++)
             {
                 for (int p2 = 0; p2 < RM.TrainingSamples[0].Feature.Descriptor.Length; ++p2)
