@@ -12,6 +12,7 @@ namespace Neural_Project
 {
     public partial class Start_Algorithms : Form
     {
+        ReadImages RM = new ReadImages();
         public Start_Algorithms()
         {
             InitializeComponent();
@@ -19,12 +20,12 @@ namespace Neural_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new Form1().Show();
+            new Neual_network_form(RM).Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new SVM_View().Show();
+            new SVM_View(RM).Show();
         }
 
         private void Start_Algorithms_Load(object sender, EventArgs e)

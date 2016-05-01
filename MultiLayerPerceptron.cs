@@ -44,6 +44,10 @@ namespace Neural_Project
                     ////Back Propagation
                     ////Output Layer 
                     AllLayers[AllLayers.Length - 1].CalculateOutputLayerSignalError(Map(Dataset.TrainingSamples[s].Lable));
+                    if (s == 1000)
+                    {
+                        int x = 0;
+                    }
                     ////All Hidden
                     for (int x = AllLayers.Length - 2; x > 0; x--)
                         AllLayers[x].CalculateSignalError(AllLayers[x + 1]);
@@ -64,22 +68,38 @@ namespace Neural_Project
             d[D.IndexOf(C[0])] = 1;
             return d;
         }
-        public double[] MLPTesting(Sample InputSample)
+        public double[] MLPTesting(loadimage InputSample)
         {
+            double[] result = new double[this.Dataset.classes.Count];
             double[] x = new double[AllLayers[AllLayers.Length - 1].Neurons.Length];
-
-            AllLayers[0].SetY(InputSample.Feature.Descriptor);
-
-            ///forward finished
-            for (int L = 1; L < AllLayers.Length; ++L)
-                AllLayers[L].Forward(AllLayers[L - 1]);
-
-            for (int i = 0; i < AllLayers[AllLayers.Length - 1].Neurons.Length; i++)
+            for (int g = 0; g < InputSample.image.Count; g++)
             {
-                x[i] = AllLayers[AllLayers.Length - 1].Neurons[i].Y;
+                AllLayers[0].SetY(InputSample.image[g].Feature.Descriptor);
 
+                ///forward finished
+                for (int L = 1; L < AllLayers.Length; ++L)
+                    AllLayers[L].Forward(AllLayers[L - 1]);
+
+                for (int i = 0; i < AllLayers[AllLayers.Length - 1].Neurons.Length; i++)
+                {
+                    x[i] = AllLayers[AllLayers.Length - 1].Neurons[i].Y;
+
+                }
+
+                result[des(x)]++;
             }
-            return x;
+            return result;
         }
+
+        private int des(double[] hu)
+        {
+            double x = hu.Max();
+            for (int v = 0; v < hu.Length; v++)
+                if (hu[v] >= x)
+                    return v;
+            return 0;
+        }
+
+
     }
 }

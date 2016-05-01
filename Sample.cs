@@ -11,7 +11,7 @@ using Emgu.CV.Util;
 
 namespace Neural_Project
 {
-    class Sample
+    public class Sample
     {
         public string[] Lable;
         public ImageFeature<float> Feature;

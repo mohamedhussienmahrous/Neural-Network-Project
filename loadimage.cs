@@ -16,26 +16,28 @@ namespace Neural_Project
         public Bitmap LM;
         public List<Sample> image;
         string path;
+        public string[] classes;
         public loadimage(string p)
         {
             this.path = p;
-            LM = new Bitmap(path);
-            image = new List<Sample>();
+            this.LM = new Bitmap(path);
+            this.image = new List<Sample>();
+            this.Load_samples();
 
         }
         public void Load_samples()
         {
-
             string tmp = path.Split('\\').Last();
             tmp = tmp.Split('.').First();
             tmp = tmp.Split('-').Last();
             string[] Cs = tmp.Split(' ');
             /////filter Classes Array to remove the Null Elements 
+            classes = this.Filter(Cs);
             ImageFeature<float>[] Points = SIFFt(LM);
             for (int x = 0; x < Points.Length; ++x)
             {
                 Sample S = new Sample();
-                S.Lable = null;
+                S.Lable = classes;
                 S.Feature = Points[x];
                 image.Add(S);
             }
@@ -48,6 +50,17 @@ namespace Neural_Project
             MKeyPoint[] key = sift.DetectKeyPoints(image, null);
             ImageFeature<float>[] res = sift.ComputeDescriptors(image, null, key);
             return res;
+        }
+
+        private string[] Filter(string[] Cs)
+        {
+            List<string> Res = new List<string>();
+            for (int i = 0; i < Cs.Length; ++i)
+                if (Cs[i] == "")
+                    continue;
+                else
+                    Res.Add(Cs[i]);
+            return Res.ToArray();
         }
     }
 }

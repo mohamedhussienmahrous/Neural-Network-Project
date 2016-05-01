@@ -14,23 +14,22 @@ using Emgu.CV.Features2D;
 
 namespace Neural_Project
 {
-    class ReadImages
+    public class ReadImages
     {
         public List<Sample> TrainingSamples;
         public List<Sample> TestingSamples;
+        public string[] TestingImages;
+        public string[] TraingImages;
         public SortedSet<string> classes = new SortedSet<string>();
-
         public ReadImages()
         {
             TrainingSamples = new List<Sample>();
             TestingSamples = new List<Sample>();
 
-
-            string[] TraingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Training");
-            string[] TestingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Testing");
-            // DataSet = new Bitmap[TraingImages.Length];
+            TraingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Training");
+            TestingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Testing");
             Read(TraingImages, ref TrainingSamples);
-            Read(TestingImages, ref TestingSamples);
+            //Read(TestingImages, ref TestingSamples);
         }
         public void Read(string[] Images, ref List<Sample> Samples)
         {
@@ -50,7 +49,6 @@ namespace Neural_Project
                     S.Lable = Classes;
                     S.Feature = Points[x];
                     Samples.Add(S);
-
                 }
             }
         }
