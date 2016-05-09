@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1803B18-05FB-4413-B070-070AB0FF775D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Neural_Project</RootNamespace>
+    <AssemblyName>Neural_Project</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Emgu.CV">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2008">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.DebuggerVisualizers.VS2008.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.DebuggerVisualizers.VS2010">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.DebuggerVisualizers.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.OCR">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.OCR.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.Stitching">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.Stitching.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.UI">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.Util">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\Emgu.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="MWArray, Version=2.15.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MATLAB\MATLAB Production Server\R2015a\toolbox\dotnetbuilder\bin\win32\v2.0\MWArray.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\..\..\..\..\..\..\emgucv-windows-x86 2.4.0.1717\bin\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivationFunctions.cs" />
+    <Compile Include="Adder.cs" />
+    <Compile Include="benchmark.cs" />
+    <Compile Include="DataGridView_Helpers.cs" />
+    <Compile Include="Euclidean_Distance.cs" />
+    <Compile Include="Neual_network_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Neual_network_form.Designer.cs">
+      <DependentUpon>Neual_network_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layer.cs" />
+    <Compile Include="loadimage.cs" />
+    <Compile Include="MultiLayerPerceptron.cs" />
+    <Compile Include="Neuron.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadImages.cs" />
+    <Compile Include="Sample.cs" />
+    <Compile Include="Show Image.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Show Image.Designer.cs">
+      <DependentUpon>Show Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Start Algorithms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start Algorithms.Designer.cs">
+      <DependentUpon>Start Algorithms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Support_Vector_Machine.cs" />
+    <Compile Include="SVM_handler.cs" />
+    <Compile Include="SVM_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SVM_View.Designer.cs">
+      <DependentUpon>SVM_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Task 3 View_handler.cs" />
+    <EmbeddedResource Include="Neual_network_form.resx">
+      <DependentUpon>Neual_network_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Show Image.resx">
+      <DependentUpon>Show Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Start Algorithms.resx">
+      <DependentUpon>Start Algorithms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SVM_View.resx">
+      <DependentUpon>SVM_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cublas32_42_9.dll" />
+    <Content Include="cudart32_42_9.dll" />
+    <Content Include="cufft32_42_9.dll" />
+    <Content Include="cvextern.dll" />
+    <Content Include="cvextern_gpu.dll" />
+    <Content Include="npp32_42_9.dll" />
+    <Content Include="opencv_calib3d240.dll" />
+    <Content Include="opencv_contrib240.dll" />
+    <Content Include="opencv_core240.dll" />
+    <Content Include="opencv_features2d240.dll" />
+    <Content Include="opencv_ffmpeg240.dll" />
+    <Content Include="opencv_flann240.dll" />
+    <Content Include="opencv_gpu240.dll" />
+    <Content Include="opencv_highgui240.dll" />
+    <Content Include="opencv_imgproc240.dll" />
+    <Content Include="opencv_legacy240.dll" />
+    <Content Include="opencv_ml240.dll" />
+    <Content Include="opencv_nonfree240.dll" />
+    <Content Include="opencv_objdetect240.dll" />
+    <Content Include="opencv_photo240.dll" />
+    <Content Include="opencv_stitching240.dll" />
+    <Content Include="opencv_video240.dll" />
+    <Content Include="opencv_videostab240.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

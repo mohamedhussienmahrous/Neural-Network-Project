@@ -100,7 +100,7 @@ namespace Neural_Project
         void Voting(Double[] output, int[,] confusionmatrix, string[] clases)
         {
             double[] beforeoutput = output;
-            List<string> mylistout = clases.ToList();
+            List<string> mylistout = RI.classes.ToList();
             for (int s = 0; s < output.Length; s++)
             {
                 if (output[s] > 3)
@@ -109,10 +109,11 @@ namespace Neural_Project
                 }
 
             }
+            int index;
 
             for (int b = 0; b < clases.Length; b++)
             {
-                int index = mylistout.IndexOf(clases[b]);
+                index = mylistout.IndexOf(clases[b]);
                 if (index != -1 && output[index] > 3)
                     ++number_of_rigth_samples;
                 ++numberallsamplesinaccurcy;

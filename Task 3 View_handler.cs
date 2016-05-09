@@ -68,7 +68,7 @@ namespace Neural_Project
             }
 
             display_results(confusion_matrix_control, overall_accuracy_control);
-            overall_accuracy_control.Text = (((this.number_of_rigth_samples) / (double)(this.numberallsamplesinaccurcy)) * 100).ToString();
+            overall_accuracy_control.Text = (((this.number_of_rigth_samples) / (double)(this.numberallsamplesinaccurcy)) * 100).ToString()+" %";
             MessageBox.Show("Done Testing");
         }
 
@@ -85,10 +85,10 @@ namespace Neural_Project
                 }
 
             }
-
+            int index = 0;
             for (int b = 0; b < clases.Length; b++)
             {
-                int index = mylistout.IndexOf(clases[b]);
+               index = mylistout.IndexOf(clases[b]);
                 if (index != -1 && output[index] > 3)
                     ++number_of_rigth_samples;
                 ++numberallsamplesinaccurcy;
