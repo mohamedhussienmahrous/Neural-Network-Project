@@ -24,9 +24,14 @@ namespace Neural_Project
         SVM model;
         ReadImages DAtaset;
         SVMParams p;
+        public List<Point>[] mm = new List<Point>[5];
         public Support_Vector_Machine(ReadImages RM)
         {
-            this.Clases = RM.classes;
+            for (int g = 0; g < 5;++g )
+            {
+                mm[g] = new List<Point>();
+            }
+                this.Clases = RM.classes;
             this.DAtaset = RM;
             trainData = new Matrix<float>(RM.TrainingSamples.Count, RM.TrainingSamples[0].Feature.Descriptor.Length);
             trainClasses = new Matrix<float>(RM.TrainingSamples.Count, 1);
@@ -53,6 +58,7 @@ namespace Neural_Project
         }
         public double[] testing(loadimage InputSample)
         {
+            
             double[] output;
             float response = 0;
             output = new double[this.DAtaset.classes.Count];
@@ -62,6 +68,11 @@ namespace Neural_Project
                     sample.Data[0, p1] = InputSample.image[trainindex].Feature.Descriptor[p1];
                 response = model.Predict(sample);
                 ++output[Convert.ToInt32(response) - 1];
+               // mm[Convert.ToInt32(response) - 1].Add(InputSample.image[trainindex].Feature.KeyPoint.Point);
+                float x = InputSample.image[trainindex].Feature.KeyPoint.Point.X;
+                float y = InputSample.image[trainindex].Feature.KeyPoint.Point.Y;
+                float index=response;
+                mm[Convert.ToInt32(response) - 1].Add(new Point(Convert.ToInt32(x), Convert.ToInt32(y)));
             }
             return output;
         }

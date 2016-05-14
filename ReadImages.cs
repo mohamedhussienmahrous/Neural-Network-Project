@@ -17,18 +17,22 @@ namespace Neural_Project
     public class ReadImages
     {
         public List<Sample> TrainingSamples;
+        private List<Sample> TMP;
         public List<Sample> TestingSamples;
         public string[] TestingImages;
         public string[] TraingImages;
         public SortedSet<string> classes = new SortedSet<string>();
+        float[] Mean;
+        float[] Max;
         public ReadImages()
         {
             TrainingSamples = new List<Sample>();
             TestingSamples = new List<Sample>();
-
+            TMP = new List<Sample>();
             TraingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Training");
             TestingImages = Directory.GetFiles(Application.StartupPath + "\\Data set\\Testing");
-            Read(TraingImages, ref TrainingSamples);
+            Read(TraingImages, ref TMP);
+            DataNormalization();
             //Read(TestingImages, ref TestingSamples);
         }
         public void Read(string[] Images, ref List<Sample> Samples)
@@ -48,6 +52,7 @@ namespace Neural_Project
                     Sample S = new Sample();
                     S.Lable = Classes;
                     S.Feature = Points[x];
+                   
                     Samples.Add(S);
                 }
             }
@@ -76,5 +81,44 @@ namespace Neural_Project
             return res;
         }
 
+        private void DataNormalization()
+        {
+             Mean = new float[TMP[0].Feature.Descriptor.Length];
+             Max = new float[TMP[0].Feature.Descriptor.Length];
+
+            ///////CalCulate Sum
+            for(int i=0;i<TMP.Count;++i)
+                for(int j=0;j<TMP[0].Feature.Descriptor.Length;++j)
+                {
+                    Mean[j] += TMP[i].Feature.Descriptor[j];
+                }
+            ///// intiatize Max and  Average Sum
+            for (int i = 0; i < TMP[0].Feature.Descriptor.Length; ++i)
+            {
+                Max[i] = float.MinValue;
+                Mean[i] /= TMP.Count;
+            }
+            ////subtract Mean and Get Sum
+            for (int i = 0; i < TMP.Count; ++i)
+                for (int j = 0; j < TMP[0].Feature.Descriptor.Length; ++j)
+                {
+                    TMP[i].Feature.Descriptor[j] -= Mean[j];
+                    if(Max[j]<TMP[i].Feature.Descriptor[j])
+                    Max[j] = TMP[i].Feature.Descriptor[j];
+                }
+            ////// Add New samples to Training Samples
+            for (int i = 0; i < TMP.Count; ++i)
+            {
+                Sample S = new Sample();
+                S.Lable = TMP[i].Lable;
+                S.Feature = TMP[i].Feature;
+                for (int j = 0; j < TMP[0].Feature.Descriptor.Length; ++j)
+                {
+                    S.Feature.Descriptor[j] = TMP[i].Feature.Descriptor[j] / Max[j];
+                    
+                }
+                TrainingSamples.Add(S);
+            }
+        }
     }
 }

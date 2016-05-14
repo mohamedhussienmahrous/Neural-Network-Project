@@ -16,7 +16,7 @@ namespace Neural_Project
         public SVM_View(ReadImages RM)
         {
             InitializeComponent();
-            SH = new SVM_handler(RM,this.dataGridView_confusion_matrix, this.textBox_overall_accuracy, this.Trainingtime, this.Testing_time);
+            SH = new SVM_handler(RM, this.dataGridView_confusion_matrix, this.textBox_overall_accuracy, this.Trainingtime, this.Testing_time, label1, label2);
         }
         public SVM_View()
         {
@@ -29,6 +29,16 @@ namespace Neural_Project
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void SVM_View_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

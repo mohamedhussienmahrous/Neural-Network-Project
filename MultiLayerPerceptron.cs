@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,13 @@ namespace Neural_Project
         public int[] NumberOfNeuronsForEachHiddenLayer;
         public Layer[] AllLayers;
         public ReadImages Dataset;
+        public List<Point>[] mm = new List<Point>[5];
         public MultiLayerPerceptron(ReadImages RI, double Eta, int NumberOfEpochs, int NumberOfHiddenLayers, int[] NumberOfNeuronsForEachHiddenLayer)
         {
+            for (int g = 0; g < 5; ++g)
+            {
+                mm[g] = new List<Point>();
+            }
 
             this.NumberOfEpochs = NumberOfEpochs;
             this.NumberOfHiddenLayers = NumberOfHiddenLayers;
@@ -44,10 +50,7 @@ namespace Neural_Project
                     ////Back Propagation
                     ////Output Layer 
                     AllLayers[AllLayers.Length - 1].CalculateOutputLayerSignalError(Map(Dataset.TrainingSamples[s].Lable));
-                    if (s == 1000)
-                    {
-                        int x = 0;
-                    }
+
                     ////All Hidden
                     for (int x = AllLayers.Length - 2; x > 0; x--)
                         AllLayers[x].CalculateSignalError(AllLayers[x + 1]);
@@ -86,6 +89,11 @@ namespace Neural_Project
 
                 }
 
+                float x1 = InputSample.image[g].Feature.KeyPoint.Point.X;
+                float y1 = InputSample.image[g].Feature.KeyPoint.Point.Y;
+                
+                mm[Convert.ToInt32(des(x)) - 1].Add(new Point(Convert.ToInt32(x1), Convert.ToInt32(y1)));
+           
                 result[des(x)]++;
             }
             return result;

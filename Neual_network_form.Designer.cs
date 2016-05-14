@@ -46,6 +46,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.Trainingtime = new System.Windows.Forms.Label();
             this.Testing_time = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NNlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confusion_matrix)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +63,7 @@
             // label_overall_accuracy
             // 
             this.label_overall_accuracy.AutoSize = true;
-            this.label_overall_accuracy.Location = new System.Drawing.Point(16, 469);
+            this.label_overall_accuracy.Location = new System.Drawing.Point(16, 538);
             this.label_overall_accuracy.Name = "label_overall_accuracy";
             this.label_overall_accuracy.Size = new System.Drawing.Size(88, 13);
             this.label_overall_accuracy.TabIndex = 37;
@@ -83,7 +85,7 @@
             // 
             this.label_confusion_matrix.AutoSize = true;
             this.label_confusion_matrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_confusion_matrix.Location = new System.Drawing.Point(15, 242);
+            this.label_confusion_matrix.Location = new System.Drawing.Point(15, 315);
             this.label_confusion_matrix.Name = "label_confusion_matrix";
             this.label_confusion_matrix.Size = new System.Drawing.Size(127, 20);
             this.label_confusion_matrix.TabIndex = 35;
@@ -93,7 +95,7 @@
             // dataGridView_confusion_matrix
             // 
             this.dataGridView_confusion_matrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_confusion_matrix.Location = new System.Drawing.Point(12, 279);
+            this.dataGridView_confusion_matrix.Location = new System.Drawing.Point(12, 350);
             this.dataGridView_confusion_matrix.Name = "dataGridView_confusion_matrix";
             this.dataGridView_confusion_matrix.Size = new System.Drawing.Size(390, 176);
             this.dataGridView_confusion_matrix.TabIndex = 34;
@@ -101,7 +103,7 @@
             // 
             // textBox_overall_accuracy
             // 
-            this.textBox_overall_accuracy.Location = new System.Drawing.Point(115, 462);
+            this.textBox_overall_accuracy.Location = new System.Drawing.Point(115, 536);
             this.textBox_overall_accuracy.Name = "textBox_overall_accuracy";
             this.textBox_overall_accuracy.Size = new System.Drawing.Size(133, 20);
             this.textBox_overall_accuracy.TabIndex = 33;
@@ -223,11 +225,33 @@
             this.Testing_time.Text = "Testing Time is";
             this.Testing_time.Click += new System.EventHandler(this.Testing_time_Click);
             // 
-            // Form1
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(17, 247);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(125, 20);
+            this.label5.TabIndex = 43;
+            this.label5.Text = "Training Memory";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(21, 287);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(121, 20);
+            this.label6.TabIndex = 44;
+            this.label6.Text = "Testing Memory";
+            // 
+            // Neual_network_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(681, 491);
+            this.ClientSize = new System.Drawing.Size(665, 568);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.Testing_time);
             this.Controls.Add(this.Trainingtime);
             this.Controls.Add(this.button4);
@@ -246,7 +270,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Epoch);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "Neual_network_form";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NNlayers)).EndInit();
@@ -276,6 +300,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label Trainingtime;
         private System.Windows.Forms.Label Testing_time;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 

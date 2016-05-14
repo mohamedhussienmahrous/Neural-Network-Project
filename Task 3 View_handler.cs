@@ -6,6 +6,9 @@ using System.Windows;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using System.Diagnostics;
+using Emgu.CV;
+using Emgu.CV.Structure;
 
 
 namespace Neural_Project
@@ -24,6 +27,9 @@ namespace Neural_Project
         double Eta;
         Label trainingtime;
         Label testingtime;
+        Label Label1;
+        Label Label2;
+        Bitmap pic_after_drow;
 
         public Task_3_View_handler(ReadImages RM)
         {
@@ -32,7 +38,7 @@ namespace Neural_Project
         public void handle_load_data_set_button_click(Form parent_form, TextBox Epoch, TextBox Eta, TextBox NumberOfHiddenLayers,
             DataGridView dgrdv_confusion_matrix,
             DataGridView NumberOfNeuronsinHidden,
-            TextBox textbox_overall_accuracy, Label trainingtime, Label TestingTime)
+            TextBox textbox_overall_accuracy, Label trainingtime, Label TestingTime,Label L1,Label l2)
         {
             confusion_matrix_control = dgrdv_confusion_matrix;
             overall_accuracy_control = textbox_overall_accuracy;
@@ -42,6 +48,8 @@ namespace Neural_Project
             this.NumberOfNeuronsInEachLayer = NumberOfNeuronsinHidden;
             this.trainingtime = trainingtime;
             this.testingtime = TestingTime;
+            Label1 = L1;
+            Label2 = l2;
             MessageBox.Show("Done");
             CreateHiddenLayersDGV();
         }
@@ -54,9 +62,15 @@ namespace Neural_Project
 
             int[] w = GetNumberOfNeurins();
             ML = new MultiLayerPerceptron(ReadIm, Eta, Epochs, NumberOfHiddenLayers, w);
+            Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+            long totalBytesOfMemoryUsed = currentProcess.WorkingSet64;
             Benchmark.Start();
             ML.MLPTraining();
             Benchmark.End();
+            Process currentProcess1 = System.Diagnostics.Process.GetCurrentProcess();
+            long totalBytesOfMemoryUsed2 = currentProcess1.WorkingSet64;
+
+            Label1.Text = "The Training Memory is " + Math.Abs(totalBytesOfMemoryUsed2 - totalBytesOfMemoryUsed) + "mBytes";
             this.trainingtime.Text = "The Training time : " + Benchmark.GetSeconds().ToString();
             double[] output = new double[ReadIm.classes.Count];
             loadimage LMR;
@@ -64,7 +78,7 @@ namespace Neural_Project
             {
                 LMR = new loadimage(this.ReadIm.TestingImages[c]);
                 output = ML.MLPTesting(LMR);
-                Voting(output, confusion_matrix, LMR.classes);
+                Voting(LMR.LM,output, confusion_matrix, LMR.classes);
             }
 
             display_results(confusion_matrix_control, overall_accuracy_control);
@@ -72,10 +86,11 @@ namespace Neural_Project
             MessageBox.Show("Done Testing");
         }
 
-        void Voting(double[] output, int[,] confusionmatrix, string[] clases)
+        void Voting(Bitmap image_input ,double[] output, int[,] confusionmatrix, string[] clases)
         {
             double[] beforeoutput = output;
             List<string> mylistout = clases.ToList();
+            if (confusion_matrix != null)
             for (int s = 0; s < output.Length; s++)
             {
                 if (output[s] > 3)
@@ -85,16 +100,30 @@ namespace Neural_Project
                 }
 
             }
+            Image<Bgr, byte> image = new Image<Bgr, byte>(image_input);
+            
+
             int index = 0;
             for (int b = 0; b < clases.Length; b++)
             {
-               index = mylistout.IndexOf(clases[b]);
+
+                index = mylistout.IndexOf(clases[b]);
                 if (index != -1 && output[index] > 3)
+                {
                     ++number_of_rigth_samples;
+
+                    for (int i = 0; i < ML.mm[index].Count(); ++i)
+                    {
+                        PointF p = new PointF(ML.mm[index][i].X, ML.mm[index][i].Y);
+                        image.Draw(new CircleF(p, 1.0f), new Bgr(255, 100, 100), -1);
+
+                    }
+
+                }
                 ++numberallsamplesinaccurcy;
             }
 
-
+            pic_after_drow = image.ToBitmap();
         }
 
         private int des(double[] hu)
@@ -156,18 +185,31 @@ namespace Neural_Project
             Show_Image SI = new Show_Image();
             SI.ShowDialog();
             loadimage KM = new loadimage(SI.loodim);
+            Process currentProcess1 = System.Diagnostics.Process.GetCurrentProcess();
+
+            long totalBytesOfMemoryUsed2 = currentProcess1.WorkingSet64;         
+        
             Benchmark.Start();
             double[] res = this.ML.MLPTesting(KM);
             string output_to_Messagebox = "the output is ";
             string[] f = this.ReadIm.classes.ToArray();
+            Voting(KM.LM, res, null, KM.classes);
             for (int d = 0; d < res.Length; d++)
             {
                 if (res[d] > 3)
                     output_to_Messagebox += " " + f[d];
             }
             Benchmark.End();
+            Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+
+            long totalBytesOfMemoryUsed = currentProcess.WorkingSet64;
+            Label2.Text = "The Testing Memory is " + Math.Abs(totalBytesOfMemoryUsed - totalBytesOfMemoryUsed2) + " Bytes";
+        
             this.testingtime.Text = "The Testing Time : " + Benchmark.GetSeconds().ToString();
             MessageBox.Show(output_to_Messagebox);
+            Showdrawing SD = new Showdrawing();
+            SD.IM.Image = pic_after_drow;
+            SD.Show();
 
         }
     }

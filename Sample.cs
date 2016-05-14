@@ -13,8 +13,8 @@ namespace Neural_Project
 {
     public class Sample
     {
-        public string[] Lable;
-        public ImageFeature<float> Feature;
+        public string[] Lable; //el desired
+        public ImageFeature<float> Feature; //guwaha l 128 descriptors
         public Sample()
         {
 

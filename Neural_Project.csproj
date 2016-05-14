@@ -103,6 +103,12 @@
     <Compile Include="Show Image.Designer.cs">
       <DependentUpon>Show Image.cs</DependentUpon>
     </Compile>
+    <Compile Include="Showdrawing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Showdrawing.Designer.cs">
+      <DependentUpon>Showdrawing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Start Algorithms.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="Show Image.resx">
       <DependentUpon>Show Image.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Showdrawing.resx">
+      <DependentUpon>Showdrawing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Start Algorithms.resx">
       <DependentUpon>Start Algorithms.cs</DependentUpon>

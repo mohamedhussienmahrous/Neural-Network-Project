@@ -39,7 +39,7 @@ namespace Neural_Project
         private void button1_Click(object sender, EventArgs e)
         {
             NN.handle_load_data_set_button_click(this, this.Epoch, Eta, this.NumberOfHidden, dataGridView_confusion_matrix,
-                this.NNlayers, this.textBox_overall_accuracy,this.Trainingtime,this.Testing_time);
+                this.NNlayers, this.textBox_overall_accuracy,this.Trainingtime,this.Testing_time,label5,label6);
         }
 
         private void button3_Click(object sender, EventArgs e)
