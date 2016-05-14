@@ -150,9 +150,9 @@ namespace Neural_Project
                 if (index != -1 && output[index] > 3)
                 {
                     ++number_of_rigth_samples;
-                    if (confusion_matrix != null)
+                    if (confusionmatrix != null)
                     {
-                        confusionmatrix[0, index]++;
+                        confusion_matrix[0, index]++;
                     }
                     for (int i = 0; i < S_V_M.mm[index].Count(); ++i)
                     {

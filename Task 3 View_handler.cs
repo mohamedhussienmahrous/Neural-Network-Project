@@ -90,12 +90,12 @@ namespace Neural_Project
         {
             double[] beforeoutput = output;
             List<string> mylistout = clases.ToList();
-            if (confusion_matrix != null)
+            if (confusionmatrix != null)
             for (int s = 0; s < output.Length; s++)
             {
                 if (output[s] > 3)
                 {
-                    confusionmatrix[0, s]++;
+                    confusion_matrix[0, s]++;
 
                 }
 
